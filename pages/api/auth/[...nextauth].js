@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
-import { refreshAccessToken } from "spotify-web-api-node/src/server-methods";
 import spotifyApi, { LOGIN_URL } from "../../../lib/spotify";
 
 async function refreshAccessToken(token) {
@@ -14,8 +13,8 @@ async function refreshAccessToken(token) {
     return {
       ...token,
       accessToken: refreshedToken.access_token,
-      accessTokenExpires: Date.now() + refreshedToken.expires_in * 1000,
-      refreshToken: refreshedToken.refresh_token ?? token.refresh_token,
+      accessTokenExpires: Date.now + refreshedToken.expires_in * 1000,
+      refreshToken: refreshedToken.refresh_token ?? token.refreshToken,
     };
   } catch (error) {
     console.log(error);
